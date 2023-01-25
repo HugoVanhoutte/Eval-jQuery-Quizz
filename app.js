@@ -1,73 +1,45 @@
 let flags = [
-    "FR",
-    "DE",
-    "UK",
-    "IT",
-    "ES",
-    "US",
-    "PO",
-    "PL",
-    "CZ",
-    "JP",
-    "IR",
-    "CA",
-    "BE",
-]
-
-let guesses = [
     "France",
-    "Allemagne",
-    "Royaume-Uni",
-    "Italie",
-    "Espagne",
+    "Germany",
+    "United_Kingdom",
+    "Italy",
+    "Spain",
     "Portugal",
-    "Pologne",
-    "République Tchèque",
-    "Japon",
-    "Irelande",
+    "Poland",
+    "Czech_Republic",
+    "Japan",
+    "Ireland",
     "Canada",
-    "Belgique"
+    "Belgium"
 ]
 
-function generate(){
-    //Choisir un drapeau au hasard
-    //Choisir 4 questions differentes au hasard
-    let randomNumber = Math.floor(Math.random()*flags.length)
-    return flags[randomNumber];
+//fonction de generation de chiffre aleatoire entre o et max
+let randomNumber = (max) => {
+    return Math.floor(Math.random()*max);
 }
 
 
 
-let startGame = () => {
-  //Lance un compte a rebours de 10 secondes
-  //Genere un premoier drapeau et un premier set de 4 choix
-
-    let game = setTimeout(generate(), 10000);
-    let questions = [];
-    let generateQuestions = () => {
-        for (let i = 0; i < 4; i++) {
-            questions.push(guesses[Math.floor(Math.random() * guesses.length)])
-        }
-        let questionsSet = new Set(questions);
-        console.log(generateQuestions())
-        if (questionsSet.length !== 4) {
-            generateQuestions()
-        } else {
-            return questionsSet
-        }
+//fonction de generation d'un array composé de number entrées
+let randomArray = (array, number) => {
+    let generatedArray = [];
+    for (let i = 0; i < number; i++) {
+        generatedArray.push(array[randomNumber(array.length)]);
     }
+    //Check si pas de doublons
+    if(!(new Set(generatedArray).size === generatedArray.length)){
 
-    //met fin au timer
-    //clearTimeout(game);
-    //Affiche score
+        console.log("passage =")
+        console.log(generatedArray);
 
-    //Clear Le reste
+        randomArray(array,number);
+    } else {
+
+        console.log(generatedArray)
+
+        //FIXME return undefined quand recursivité
+        return generatedArray;
+    }
 }
 
-startGame()
-
-function guess(){
-    //Check si la reponse selsctionnée est la bonne
-    //Incremente ou non le score en fonction
-    //Genere un autre drapeau et un autre set de 4 choix
-}
+console.log(randomArray(flags,4));

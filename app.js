@@ -1,5 +1,5 @@
 let url = "https://flagcdn.com/fr/codes.json"
-
+//
 //Recupération du bouton permettant de commencer la partie
 const startButton = $('#startButton');
 

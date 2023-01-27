@@ -15,9 +15,11 @@ const image = $('#question img');
 
 //Recuperation du score
 let scoreDisplay = $('#score');
+let wrongDisplay = $('#wrong');
 
 //creation variable score
 let score = 0;
+let wrong = 0;
 
 //fonction de generation de chiffre aleatoire entre o et max
 let randomNumber = (max) => {
@@ -93,6 +95,8 @@ $.ajax({
                     score++;
                     scoreDisplay.text(`Score : ${score}`);
                 } else {
+                    wrong++;
+                    wrongDisplay.text(`Incorrect : ${wrong}`);
                     //TODO Afficher bonne réponse
                 }
                 //Relance une nouvelle question
@@ -105,6 +109,8 @@ $.ajax({
             //Reset Score
             score = 0;
             scoreDisplay.text(`Score : ${score}`)
+            wrong = 0;
+            wrongDisplay.text(`Incorrect : ${score}`)
             //TODO reset timer
             //lance une nouvelle question
             newGame()

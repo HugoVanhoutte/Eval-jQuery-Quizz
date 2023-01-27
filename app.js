@@ -52,17 +52,15 @@ $.ajax({
 })
     .done(function (response) {
         let keys = Object.keys(response);
-        let values = response[keys];
         //Fonction prototype Permettant de set les questions aléatoirement et de choisir la bonne réponse
         Questions.prototype.setQuestions = function() {
             let questions = randomArray(keys,4);
-            this.q1 = response[questions[0]]
+            this.q1 = response[questions[0]];
             this.q2 = response[questions[1]];
             this.q3 = response[questions[2]];
             this.q4 = response[questions[3]];
 
             this.a = questions[randomNumber(questions.length)];
-            console.log(this.a)
 
             if (this.q1 === this.q2 || this.q1 === this.q3 || this.q1 === this.q4
                 || this.q2 === this.q3 || this.q2 === this.q4
@@ -90,7 +88,7 @@ $.ajax({
 
             //Recup click et verification resultat
             allAnswers.click(function () {
-                if($(this).val() === game.a){
+                if($(this).val() === response[game.a]){
                     //Si bonne réponse:
                     score++;
                     scoreDisplay.text(`Score : ${score}`);

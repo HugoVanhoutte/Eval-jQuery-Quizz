@@ -78,6 +78,7 @@ body {
     flex-flow: column wrap;
 
     align-items: center;
+    margin-top: 2rem;
 }
 
 input {
@@ -117,9 +118,6 @@ input {
                 color: red;
             }
 
-    #container #question {
-
-    }
         #container #question h2 {
             /* texte statique question */
             font-size: 3rem;

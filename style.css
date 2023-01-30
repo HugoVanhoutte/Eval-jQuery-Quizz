@@ -137,10 +137,10 @@ input {
         }
             #container #question #flag img {
                 /* Image du drapeau /!\ Format variable /!\ */
-                height: auto;
-                width: 100%;
+                height: 100%;
+                width: auto;
 
-                max-height: 100%;
+                max-width: 100%;
             }
 
     #container #answers {
@@ -166,9 +166,4 @@ input {
         #container .answer {
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
-        }
-
-        /*Si ecran < 1000px: */
-            /* Etendre les reponses a 100% de l'argeur */
-        @media screen and (max-width: 1000px) {
         }

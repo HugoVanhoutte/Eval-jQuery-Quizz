@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nova+Round">-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nova+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600">
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9010a17673.js" crossorigin="anonymous"></script>
     <title>index</title>
 </head>
 <body>
 <div id="container">
     <header>
-        <input type="button" value="New Game" id="startButton">
-        <h2 id="score"></h2>
-        <h2 id="wrong"></h2>
-        <h2>A quel pays ce drapeau appartient-il ?</h2>
+        <input type="button" value="Nouvelle Partie" id="startButton">
+        <div id="scores">
+            <i class="fa-solid fa-square-check fa-3x" id="score"></i>
+            <i class="fa-solid fa-square-xmark fa-3x" id="wrong"></i>
+        </div>
+
     </header>
     <div id="question">
-        <img src="" alt="Flag to guess">
+        <h2>A quel pays ce drapeau appartient-il ?</h2>
+        <div id="flag"><img src="" alt="Flag to guess">
+        </div>
     </div>
 
     <div id="answers">

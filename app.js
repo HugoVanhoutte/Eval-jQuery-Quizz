@@ -1,5 +1,4 @@
-let url = "https://flagcdn.com/fr/codes.json"
-//
+
 //Recupération du bouton permettant de commencer la partie
 const startButton = $('#startButton');
 
@@ -47,10 +46,8 @@ function Questions() {
 
 
 
-$.ajax({
-    url: url,
-    method: "GET",
-    dataType: "json"
+$.getJSON({
+    url: "https://flagcdn.com/fr/codes.json",
 })
     .done(function (response) {
         let keys = Object.keys(response);
@@ -93,10 +90,10 @@ $.ajax({
                 if($(this).val() === response[game.a]){
                     //Si bonne réponse:
                     score++;
-                    scoreDisplay.text(`Score : ${score}`);
+                    scoreDisplay.text(score);
                 } else {
                     wrong++;
-                    wrongDisplay.text(`Incorrect : ${wrong}`);
+                    wrongDisplay.text(wrong);
                     //TODO Afficher bonne réponse
                 }
                 //Relance une nouvelle question
@@ -108,9 +105,9 @@ $.ajax({
         startButton.click(function (){
             //Reset Score
             score = 0;
-            scoreDisplay.text(`Score : ${score}`)
+            scoreDisplay.text(score)
             wrong = 0;
-            wrongDisplay.text(`Incorrect : ${score}`)
+            wrongDisplay.text(score)
             //TODO reset timer
             //lance une nouvelle question
             newGame()

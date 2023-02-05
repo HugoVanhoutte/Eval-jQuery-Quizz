@@ -98,10 +98,13 @@ $.ajax({
                     wrong++;
                     wrongDisplay.text(`Incorrect : ${wrong}`);
                     //TODO Afficher bonne réponse
+
                 }
                 //Relance une nouvelle question
                 newGame();
                 //TODO affichage historique des réponses
+
+
             })
         }
 //event Listener de début de partie

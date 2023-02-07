@@ -10,15 +10,27 @@ const answer4 = $('#answer4');
 const allAnswers = $('.answer');
 
 //Recuperation de l'image
-const image = $('#question img');
+const image = $('#flag img');
 
 //Recuperation du score
 let scoreDisplay = $('#score');
-let wrongDisplay = $('#wrong');
+
+//Recuperation du compteur
+let counterDisplay = $('#counter');
+
+//Recuperation de l'historique
+let history = $('#historyDiv');
+let historyList = $('#history');
+let historyFinalScore = $('#scoreFinal');
 
 //creation variable score
 let score = 0;
-let wrong = 0;
+
+//Creation variable compteur
+let counter = 1;
+
+//Déclaration de la variable réponse utilisateur
+let userAnswer;
 
 //fonction de generation de chiffre aleatoire entre o et max
 let randomNumber = (max) => {
@@ -87,28 +99,64 @@ $.getJSON({
 
             //Recup click et verification resultat
             allAnswers.click(function () {
+                userAnswer = $(this).val();
+                /*
                 if($(this).val() === response[game.a]){
-                    //Si bonne réponse:
-                    score++;
-                    scoreDisplay.text(score);
+                    //Si bonne réponse
+                    if(counter < 10){
+                        //si compteur pas fini, on incremente le score et on met le texte a jour
+                        score++;
+                        scoreDisplay.text(`Score: ${score}/10`);
+                    } else {
+                        //Compteur fini, on incremente pas le score
+                    }
                 } else {
-                    wrong++;
-                    wrongDisplay.text(wrong);
-                    //TODO Afficher bonne réponse
+                    //Si mauvaise réponse, rien
                 }
-                //Relance une nouvelle question
-                newGame();
-                //TODO affichage historique des réponses
+                //Relance une nouvelle question si compteur < 10
+                if(counter < 10){
+                    //Mettre la réponse donnée dans une variable
+                    userAnswer = $(this).val();
+                    historyList.append(`<li>Votre réponse: ${userAnswer}<br>Bonne réponse: ${response[game.a]}<hr></li>`);
+                    newGame();
+                } else {
+                    scoreDisplay.text(`Score: ${score}/10`);
+                }*/
+                //Verification Compteur
+                if (counter < 10) {
+                    //Compteur inferieur ou egal a 10
+                    //Mise a jour de l'historique
+                    counter ++;
+                    historyList.append(`<li>Votre réponse: ${userAnswer}<br>Bonne réponse: ${response[game.a]}<hr></li>`);
+                    newGame();
+                } else {
+                    //Compteur superieur a 10
+                    //Fermer ecouteur d'evenement
+                    allAnswers.off('click');
+                }
+
+                //Vérification reponse
+                if (userAnswer === response[game.a]){
+                    //Bonne réponse
+                    score++;
+                } else {
+                    //Mauvaise réponse
+                }
+                //Dans tout les cas:
+                //mise a jour de l'affichage du score
+                scoreDisplay.text(`Score: ${score}/10`);
             })
         }
 //event Listener de début de partie
         startButton.click(function (){
             //Reset Score
             score = 0;
-            scoreDisplay.text(score)
-            wrong = 0;
-            wrongDisplay.text(score)
-            //TODO reset timer
+            scoreDisplay.text(`Score: ${score}/10`);
+            //reset compteur
+            counter = 0;
+            counterDisplay.text(`Question: ${counter}/10`);
+            //Clear Historique
+            historyList.html('');
             //lance une nouvelle question
             newGame()
         });

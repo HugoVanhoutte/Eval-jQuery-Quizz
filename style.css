@@ -63,10 +63,6 @@ html {
     --fifth-color: #000;
 }
 
-*{
-    font-family: 'Raleway', sans-serif;
-    color: var(--text-and-border-color);
-}
 
 
 body {
@@ -74,11 +70,16 @@ body {
 }
 
 #container {
+    height: 100vh;
+    width: 100vw;
+
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: column;
 
     align-items: center;
-    margin-top: 2rem;
+
+    font-family: 'Raleway', sans-serif;
+    color: var(--text-and-border-color);
 }
 
 input {
@@ -87,83 +88,117 @@ input {
     background-color: var(--button-color);
     border-radius: 10rem;
     border: var(--text-and-border-color) 0.5rem solid;
+    color: var(--text-and-border-color);
 }
 
-    #container header {
-        display: flex;
-        flex-flow: column wrap;
+#topPart {
+    /* top part: left panel, central panel, right panel */
+    display: flex;
+    flex-flow: row;
 
-        align-items: center;
+    height: 75vh;
+    width: 100%;
+}
+
+#leftPanel {
+    /* Left panel: Score + new game button */
+    display: flex;
+    flex-flow: column wrap;
+    height: 100%;
+    width: 20%;
+}
+    #startButton {
+        /* new game button */
         width: 100%;
-        max-width: 100vw;
+        height: 10%;
     }
-        #container header input {
-            /* Bouton nouvelle partie */
-        }
-        #container header #scores {
-            /* Div contenant les divs de score */
-            display: flex;
-            flex-flow: wrap row;
 
-            width: 25%;
-            justify-content: space-evenly;
-        }
-
-            #container header #scores #score {
-                /* Div contenant le score positif */
-                color: green;
-            }
-            #container header #scores #wrong {
-                /* Div contenant le score negatif */
-                color: red;
-            }
-
-        #container #question h2 {
-            /* texte statique question */
-            font-size: 3rem;
-            text-align: center;
-            font-family: 'Raleway', sans-serif;
-            max-width: 100vw;
-        }
-        #container #question #flag {
-            /* div contenant le drapeau */
-            height: 20rem;
-
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: center;
-            margin: 2rem;
-        }
-            #container #question #flag img {
-                /* Image du drapeau /!\ Format variable /!\ */
-                height: 100%;
-                width: auto;
-
-                max-width: 100%;
-            }
-
-    #container #answers {
-        /* Div contenat les quatres boutons de proposition */
-        display: flex;
-        flex-flow: wrap column;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        height: 20rem;
+    #score {
+        /* score /10 */
+        font-size: 10rem;
+        text-align: center;
     }
-        #container .answer {
-            /* Propositions (Le style ne change pas en fonction de la proposition) */
-            width: 100%;
-            height: 24%;
-            overflow-x: scroll;
-        }
-        #container .answer::-webkit-scrollbar {
-            display: none;
-        }
 
-        /* Hide scrollbar for IE, Edge and Firefox */
-        #container .answer {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+
+#centerPanel {
+    /* Center panel: question + flag div */
+    display: flex;
+    flex-flow: column;
+
+    height: 100%;
+    width: 80%;
+}
+
+#centerPanel h2 {
+    /* Asked question */
+    text-align: center;
+    font-size: 4rem;
+    height: 20%;
+    width: 100%;
+}
+
+#flag {
+    /* Div contenant l'image du drapeau et l'historique quand la partie se termine */
+    display: flex;
+    flex-flow: column;
+
+    justify-content: center;
+    align-items: center;
+
+    height: 80%;
+    width: 100%;
+}
+
+#flag img {
+    height: auto;
+    width: 50%;
+}
+
+#rightPanel {
+    /* right panel: counter + history */
+    display: flex;
+    flex-flow: column wrap;
+
+    height: 100%;
+    width: 20%;
+}
+
+ #rightPanel p {
+     /* Counter Display */
+     display: flex;
+     flex-flow: column wrap;
+
+     font-size: 5rem;
+     text-align: center;
+ }
+
+#bottomPart {
+    /* Bottom part: 4 possibilities */
+    display: flex;
+    flex-flow: column wrap;
+
+    height: 25%;
+    width: 75%;
+}
+
+    .answer {
+        /* Each possible answer */
+        margin: 0.25rem;
+    }
+
+#historyDiv {
+    /* History end of game */
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#historyDiv ul {
+    font-size: 1.7rem;
+    text-align: center;
+
+    display: flex;
+    flex-flow: column wrap;
+}
+
+

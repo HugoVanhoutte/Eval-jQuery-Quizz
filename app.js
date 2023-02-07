@@ -9,34 +9,31 @@ const answer3 = $('#answer3');
 const answer4 = $('#answer4');
 const allAnswers = $('.answer');
 
-//Recuperation de l'image
+//Récupération de l'image
 const image = $('#flag img');
 
 //Recuperation du score
 let scoreDisplay = $('#score');
 
-//Recuperation du compteur
-let counterDisplay = $('#counter');
-
 //Recuperation de l'historique
-let history = $('#historyDiv');
 let historyList = $('#history');
-let historyFinalScore = $('#scoreFinal');
 
-//creation variable score
+//création de la variable score
 let score = 0;
 
-//Creation variable compteur
+//Création de la variable compteur
 let counter = 1;
+//Récupération du compteur depuis le DOM
+let counterDisplay = $('#counter');
 
-//Déclaration de la variable réponse utilisateur
-let userAnswer;
+//Déclaration du tableau réponses
+let answers = [];
 
-//fonction de generation de chiffre aleatoire entre o et max
+//Fonction de génération de chiffre aléatoire entre o et "max"
 let randomNumber = (max) => {
     return Math.floor(Math.random()*max);
 }
-//fonction de generation d'un array composé de number entrées
+//Fonction de generation d'un tableau composé de "number" entrées
 let randomArray = (array, number) => {
     let generatedArray = [];
     for (let i = 0; i < number; i++) {
@@ -63,7 +60,7 @@ $.getJSON({
 })
     .done(function (response) {
         let keys = Object.keys(response);
-        //Fonction prototype Permettant de set les questions aléatoirement et de choisir la bonne réponse
+        //Fonction prototype Permettant de choisir les questions aléatoirement et de choisir la bonne réponse
         Questions.prototype.setQuestions = function() {
             let questions = randomArray(keys,4);
             this.q1 = response[questions[0]];
@@ -83,7 +80,6 @@ $.getJSON({
         const game = new Questions();
         //Function pour lancer une nouvelle partie
         function newGame() {
-
             game.setQuestions();
             //Mise des 4 questions dans les divs
             answer1.val(game.q1);
@@ -93,75 +89,55 @@ $.getJSON({
 
             //Mise du drapeau dans l'image
             image.attr('src', `https://flagcdn.com/${game.a}.svg`);
-
-            //Supression de l'ecouteur precedent
+            //Suppression de l'écouteur precedent
             allAnswers.off('click');
 
-            //Recup click et verification resultat
+            //Récupération du clic et vérification du résultat
             allAnswers.click(function () {
-                userAnswer = $(this).val();
-                /*
-                if($(this).val() === response[game.a]){
-                    //Si bonne réponse
-                    if(counter < 10){
-                        //si compteur pas fini, on incremente le score et on met le texte a jour
-                        score++;
-                        scoreDisplay.text(`Score: ${score}/10`);
-                    } else {
-                        //Compteur fini, on incremente pas le score
-                    }
-                } else {
-                    //Si mauvaise réponse, rien
-                }
-                //Relance une nouvelle question si compteur < 10
-                if(counter < 10){
-                    //Mettre la réponse donnée dans une variable
-                    userAnswer = $(this).val();
-                    historyList.append(`<li>Votre réponse: ${userAnswer}<br>Bonne réponse: ${response[game.a]}<hr></li>`);
-                    newGame();
-                } else {
-                    scoreDisplay.text(`Score: ${score}/10`);
-                }*/
                 //Verification Compteur
                 if (counter < 10) {
-                    //Compteur inferieur ou egal a 10
-                    //Mise a jour de l'historique
+                    //Si le compteur est inférieur à 10
+                    //Incrementation du compteur et mise à jour
                     counter ++;
+                    counterDisplay.text(`Question: ${counter}/10`);
+                    //Mise à jour de l'historique
                     historyList.append(`<li>Votre réponse: ${userAnswer}<br>Bonne réponse: ${response[game.a]}<hr></li>`);
                     newGame();
                 } else {
-                    //Compteur superieur a 10
-                    //Fermer ecouteur d'evenement
+                    //Sinon si le compteur est supérieur ou égal à 10
+                    //Fermer l'écouteur d'évènement
                     allAnswers.off('click');
+                    $('#historyDiv').css('display', 'flex')
                 }
 
-                //Vérification reponse
-                if (userAnswer === response[game.a]){
-                    //Bonne réponse
+                //Vérification de la réponse
+                if ($(this).val() === response[game.a]){
+                    //Si bonne réponse
                     score++;
                 } else {
                     //Mauvaise réponse
                 }
-                //Dans tout les cas:
-                //mise a jour de l'affichage du score
+                //Dans tous les cas
+                //Mise à jour de l'affichage du score
                 scoreDisplay.text(`Score: ${score}/10`);
             })
         }
-//event Listener de début de partie
+        //Écouteur du bouton "Nouvelle Partie"
         startButton.click(function (){
-            //Reset Score
+            //Reinitialisation du score, de l'historique et du compteur
             score = 0;
             scoreDisplay.text(`Score: ${score}/10`);
-            //reset compteur
-            counter = 0;
-            counterDisplay.text(`Question: ${counter}/10`);
-            //Clear Historique
+
             historyList.html('');
-            //lance une nouvelle question
+
+            counter = 1;
+            counterDisplay.text(`Question: ${counter}/10`);
+
+            //lancement d'une nouvelle question
             newGame()
         });
     })
-
+    //En cas d'échec de la requête Ajax
     .fail(function () {
         console.log(Error);
     })

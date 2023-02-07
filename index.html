@@ -2,41 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!--Balise viewport pour les media queries et le responsive design-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nova+Round">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600">
-    <link rel="stylesheet" href="style.css">
+    <!--Inclusion d'une police google font-->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+    <!--Inclusion de font awesome-->
     <script src="https://kit.fontawesome.com/9010a17673.js" crossorigin="anonymous"></script>
+    <!--Inclusion de la feuille de style-->
+    <link rel="stylesheet" href="style.css">
     <title>index</title>
 </head>
 <body>
+<!--Div container, contenant tout, sauf l'historique-->
 <div id="container">
-
+    <!--Div topPArt, contenant toute la partie du haut pour l'affichage sur PC-->
     <div id="topPart">
+        <!--Div contenant le panneau de gauche, avec le score et le bouton "nouvelle partie"-->
         <div id="leftPanel">
-            <input type="button" value="Nouvelle Partie" id="startButton">
+            <button id="startButton"><i class="fa-solid fa-circle-play fa-4x"></i></button>
                 <p id="score">Score: 0/10</p>
         </div>
+        <!--Div du panneau central, contenant la question et le drapeau à afficher-->
         <div id="centerPanel">
             <h2>A quel pays ce drapeau appartient-il ?</h2>
             <div id="flag">
                 <img src="" alt="Flag to guess">
             </div>
         </div>
+        <!--Panneau de droite, contenant le compteur-->
         <div id="rightPanel">
             <p id="counter">Question: 0/10</p>
-            <div id="historyDiv">
-                <ul id="history">
-                </ul>
-            </div>
+
 
         </div>
     </div>
+    <!--Div contenant la partie basse, les réponses possibles-->
     <div id="bottomPart">
-        <input type="button" id="answer1" class="answer">
-        <input type="button" id="answer2" class="answer">
-        <input type="button" id="answer3" class="answer">
-        <input type="button" id="answer4" class="answer">
+        <div id="answers">
+            <input type="button" id="answer1" class="answer">
+            <input type="button" id="answer2" class="answer">
+            <input type="button" id="answer3" class="answer">
+            <input type="button" id="answer4" class="answer">
+        </div>
+    </div>
+    <div id="historyDiv">
+        <ul id="history">
+        </ul>
     </div>
 </div>
 <script src="jQuery.js"></script>

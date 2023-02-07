@@ -1,4 +1,3 @@
-
 //Recupération du bouton permettant de commencer la partie
 const startButton = $('#startButton');
 
@@ -31,7 +30,7 @@ let answers = [];
 
 //Fonction de génération de chiffre aléatoire entre o et "max"
 let randomNumber = (max) => {
-    return Math.floor(Math.random()*max);
+    return Math.floor(Math.random() * max);
 }
 //Fonction de generation d'un tableau composé de "number" entrées
 let randomArray = (array, number) => {
@@ -54,15 +53,14 @@ function Questions() {
 }
 
 
-
 $.getJSON({
     url: "https://flagcdn.com/fr/codes.json",
 })
     .done(function (response) {
         let keys = Object.keys(response);
         //Fonction prototype Permettant de choisir les questions aléatoirement et de choisir la bonne réponse
-        Questions.prototype.setQuestions = function() {
-            let questions = randomArray(keys,4);
+        Questions.prototype.setQuestions = function () {
+            let questions = randomArray(keys, 4);
             this.q1 = response[questions[0]];
             this.q2 = response[questions[1]];
             this.q3 = response[questions[2]];
@@ -72,12 +70,13 @@ $.getJSON({
 
             if (this.q1 === this.q2 || this.q1 === this.q3 || this.q1 === this.q4
                 || this.q2 === this.q3 || this.q2 === this.q4
-                || this.q3 === this.q4){
+                || this.q3 === this.q4) {
                 this.setQuestions()
             }
         }
 
         const game = new Questions();
+
         //Function pour lancer une nouvelle partie
         function newGame() {
             game.setQuestions();
@@ -98,7 +97,7 @@ $.getJSON({
                 if (counter < 10) {
                     //Si le compteur est inférieur à 10
                     //Incrementation du compteur et mise à jour
-                    counter ++;
+                    counter++;
                     counterDisplay.text(`Question: ${counter}/10`);
                     //Mise à jour de l'historique
                     historyList.append(`<li>Votre réponse: ${userAnswer}<br>Bonne réponse: ${response[game.a]}<hr></li>`);
@@ -111,7 +110,7 @@ $.getJSON({
                 }
 
                 //Vérification de la réponse
-                if ($(this).val() === response[game.a]){
+                if ($(this).val() === response[game.a]) {
                     //Si bonne réponse
                     score++;
                 } else {
@@ -122,8 +121,9 @@ $.getJSON({
                 scoreDisplay.text(`Score: ${score}/10`);
             })
         }
+
         //Écouteur du bouton "Nouvelle Partie"
-        startButton.click(function (){
+        startButton.click(function () {
             //Reinitialisation du score, de l'historique et du compteur
             score = 0;
             scoreDisplay.text(`Score: ${score}/10`);

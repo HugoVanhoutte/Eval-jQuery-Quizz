@@ -64,7 +64,6 @@ html {
 }
 
 
-
 body {
     background-color: var(--background-color);
 }
@@ -97,9 +96,6 @@ button {
     border: none;
 
     color: var(--text-and-border-color);
-
-    width: 100%;
-    height: auto;
 }
 
 #topPart {
@@ -118,17 +114,18 @@ button {
     height: 100%;
     width: 20%;
 }
-    #startButton {
-        /* new game button */
-        width: 100%;
-        height: 10%;
-    }
 
-    #score {
-        /* score /10 */
-        font-size: 5rem;
-        text-align: center;
-    }
+#startButton {
+    /* new game button */
+    width: 100%;
+    height: 10%;
+}
+
+#score {
+    /* score /10 */
+    font-size: 5rem;
+    text-align: center;
+}
 
 
 #centerPanel {
@@ -175,14 +172,14 @@ button {
     width: 20%;
 }
 
- #rightPanel p {
-     /* Counter Display */
-     display: flex;
-     flex-flow: column wrap;
+#rightPanel p {
+    /* Counter Display */
+    display: flex;
+    flex-flow: column wrap;
 
-     font-size: 5rem;
-     text-align: center;
- }
+    font-size: 5rem;
+    text-align: center;
+}
 
 #bottomPart {
     /* Bottom part: 4 possibilities */
@@ -192,20 +189,21 @@ button {
     height: 25%;
     width: 75%;
 }
-    #answers {
-        display: flex;
-        flex-flow: column wrap;
 
-        height: 100%;
-    }
+#answers {
+    display: flex;
+    flex-flow: column wrap;
 
-    .answer {
-        /* Each possible answer */
-        margin: 0.15rem;
-        height: 23%;
+    height: 100%;
+}
 
-        font-size: 2rem;
-    }
+.answer {
+    /* Each possible answer */
+    margin: 0.15rem;
+    height: 23%;
+
+    font-size: 2rem;
+}
 
 #historyDiv {
     /* History end of game */
@@ -226,6 +224,7 @@ button {
     display: flex;
     flex-flow: column wrap;
 }
+
 /*Tablettes en mode portrait et grand mobiles*/
 @media screen and (max-width: 600px) {
     /*Score a gauche, bouton au milieu, compteur a droite*/
@@ -241,23 +240,26 @@ button {
         width: 25%;
         height: 100%;
     }
+
     #leftPanel #startButton {
         font-size: 1rem;
     }
+
     #leftPanel #score {
         font-size: 2rem;
     }
 
     /*Drapeau*/
-
     #centerPanel {
         width: 50%;
         height: 100%;
     }
-    #centerPanel h2{
+
+    #centerPanel h2 {
         font-size: 2rem;
     }
-    #centerPanel #flag img{
+
+    #centerPanel #flag img {
         width: 120%;
         height: auto;
         max-height: 95%;
@@ -267,11 +269,12 @@ button {
         width: 25%;
         height: 100%;
     }
-    #rightPanel #counter{
+
+    #rightPanel #counter {
         font-size: 2rem;
     }
-    /*Reponses*/
 
+    /*Reponses*/
     #bottomPart {
         height: 40%;
         width: 100%;
@@ -285,5 +288,6 @@ button {
     .answer {
         width: 100%;
     }
+
     /*Historique*/
 }

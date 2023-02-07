@@ -3,24 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nova+Round">-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nova+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@600">
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/9010a17673.js" crossorigin="anonymous"></script>
     <title>index</title>
 </head>
 <body>
 <div id="container">
-    <header>
-        <input type="button" value="New Game" id="startButton">
-        <h2 id="score"></h2>
-        <h2 id="wrong"></h2>
-        <h2>A quel pays ce drapeau appartient-il ?</h2>
-    </header>
-    <div id="question">
-        <img src="" alt="Flag to guess">
-    </div>
 
-    <div id="answers">
+    <div id="topPart">
+        <div id="leftPanel">
+            <input type="button" value="Nouvelle Partie" id="startButton">
+                <p id="score">Score: 0/10</p>
+        </div>
+        <div id="centerPanel">
+            <h2>A quel pays ce drapeau appartient-il ?</h2>
+            <div id="flag">
+                <img src="" alt="Flag to guess">
+            </div>
+        </div>
+        <div id="rightPanel">
+            <p id="counter">Question: 0/10</p>
+            <div id="historyDiv">
+                <ul id="history">
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div id="bottomPart">
         <input type="button" id="answer1" class="answer">
         <input type="button" id="answer2" class="answer">
         <input type="button" id="answer3" class="answer">

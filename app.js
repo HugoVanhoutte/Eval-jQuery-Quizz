@@ -14,8 +14,6 @@ const image = $('#flag img');
 //Recuperation du score
 let scoreDisplay = $('#score');
 
-//Recuperation de l'historique
-let historyList = $('#history');
 
 //création de la variable score
 let score = 0;
@@ -25,8 +23,6 @@ let counter = 1;
 //Récupération du compteur depuis le DOM
 let counterDisplay = $('#counter');
 
-//Déclaration du tableau réponses
-let answers = [];
 
 //Fonction de génération de chiffre aléatoire entre o et "max"
 let randomNumber = (max) => {
@@ -99,8 +95,6 @@ $.getJSON({
                     //Incrementation du compteur et mise à jour
                     counter++;
                     counterDisplay.text(`Question: ${counter}/10`);
-                    //Mise à jour de l'historique
-                    historyList.append(`<li>Votre réponse: ${userAnswer}<br>Bonne réponse: ${response[game.a]}<hr></li>`);
                     newGame();
                 } else {
                     //Sinon si le compteur est supérieur ou égal à 10
@@ -113,8 +107,10 @@ $.getJSON({
                 if ($(this).val() === response[game.a]) {
                     //Si bonne réponse
                     score++;
+                    alert("Bonne réponse");
                 } else {
                     //Mauvaise réponse
+                    alert("Mauvaise réponse" + response[game.a])
                 }
                 //Dans tous les cas
                 //Mise à jour de l'affichage du score
@@ -124,11 +120,9 @@ $.getJSON({
 
         //Écouteur du bouton "Nouvelle Partie"
         startButton.click(function () {
-            //Reinitialisation du score, de l'historique et du compteur
+            //Reinitialisation du score et du compteur
             score = 0;
             scoreDisplay.text(`Score: ${score}/10`);
-
-            historyList.html('');
 
             counter = 1;
             counterDisplay.text(`Question: ${counter}/10`);

@@ -11,8 +11,14 @@ const allAnswers = $('.answer');
 //Récupération de l'image
 const image = $('img');
 
-//Recuperation du score
-let scoreDisplay = $('#score');
+//Recuperation du score depuis le DOM
+const scoreDisplay = $('#scoreNum');
+
+//Récupération du compteur depuis le DOM
+const counterDisplay = $('#counterNum');
+
+//History List
+const historyList = $('#historyList');
 
 
 //création de la variable score
@@ -20,8 +26,6 @@ let score = 0;
 
 //Création de la variable compteur
 let counter = 0;
-//Récupération du compteur depuis le DOM
-let counterDisplay = $('#counter');
 
 
 //Fonction de génération de chiffre aléatoire entre o et "max"
@@ -73,8 +77,12 @@ $.getJSON({
 
         const game = new Questions();
 
-        //Function pour lancer une nouvelle partie
+        //Function pour lancer une nouvelle partie (nouveau set de questions)
         function newGame() {
+            if (counter <= 10){
+                historyList.append(`<li>${response[game.a]}</li>`);
+            }
+            console.log(response[game.a]) //TODO REMOVE
             game.setQuestions();
             //Mise des 4 questions dans les divs
             answer1.text(game.q1);
@@ -86,44 +94,39 @@ $.getJSON({
             image.attr('src', `https://flagcdn.com/${game.a}.svg`);
             //Suppression de l'écouteur precedent
             allAnswers.off('click');
-
-
-            //TODO REMOVE
-            console.log(response[game.a]);
             //Récupération du clic et vérification du résultat
             allAnswers.click(function () { //Good Answer
                 if ($(this).text() === response[game.a]){
-
-                    //TODO REMOVE
-                    console.log("correct")
+                    score++;
                 } else { //Wrong Answer
-
-                    //TODO REMOVE
-                    console.log("not correct")
                 }
 
                 if (counter < 10){ //Counter not finished
                     counter++;
+                    counterDisplay.text(counter)
                     newGame();
-                } else { //Counter Finished
-                    allAnswers.off('click');
-                    //Display History
-
                 }
+                else { //Counter Finished
+                    allAnswers.off('click');
+                }
+                //All cases
+                scoreDisplay.text(score);
             })
         }
 
         //Écouteur du bouton "Nouvelle Partie"
         startButton.click(function () {
-            //Reinitialisation du score et du compteur
+            //Reinitialisation du score, de l'historique et du compteur
             score = 0;
-            scoreDisplay.text(`Score: ${score}/10`);
+            scoreDisplay.text(score);
 
             counter = 1;
-            counterDisplay.text(`Question: ${counter}/10`);
+            counterDisplay.text(counter);
+
+            historyList.children().html('');
 
             //lancement d'une nouvelle question
-            newGame()
+            newGame();
         });
     })
     //En cas d'échec de la requête Ajax

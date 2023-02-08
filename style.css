@@ -66,228 +66,172 @@ html {
 
 body {
     background-color: var(--background-color);
+    font-family: 'Raleway', sans-serif;
+
+    position: fixed;                                                                                                    /*Disable scroll*/
 }
 
-#container {
+
+#container {                                                                                                            /*Container: 100% of screen on widtn and height*/
     height: 100vh;
     width: 100vw;
 
+    max-height: 100vh;
+
     display: flex;
     flex-flow: column;
-
-    align-items: center;
-
-    font-family: 'Raleway', sans-serif;
-    color: var(--text-and-border-color);
 }
 
-input {
-    /* All buttons */
-    font-size: 3rem;
-    background-color: var(--button-color);
+#container #topPart {                                                                                                   /*Top part: 75% of screen on top*/
+
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    height: 60%;
+    width: 100%;
+}
+
+#container #topPart #leftPanel {                                                                                        /*Left panel*/
+
+    display: flex;
+    flex-flow: column wrap;
+
+    height: 100%;
+    width: 20%;
+}
+#container #topPart #leftPanel #buttonDiv {
+    display: flex;
+    flex-flow: column wrap;
+
+    width: 100%;
+    height: 20%;
+}
+#container #topPart #leftPanel #buttonDiv button {
+    font-size: 5rem;
+    border: .5rem solid var(--text-and-border-color);
     border-radius: 10rem;
-    border: var(--text-and-border-color) 0.5rem solid;
-    color: var(--text-and-border-color);
-}
 
-button {
-    /*Suppression du style sur le bouton*/
-    background-color: unset;
-    border: none;
-
-    color: var(--text-and-border-color);
-}
-
-#topPart {
-    /* top part: left panel, central panel, right panel */
-    display: flex;
-    flex-flow: row;
-
-    height: 75vh;
+    background-color: var(--button-color);
     width: 100%;
-}
-
-#leftPanel {
-    /* Left panel: Score + new game button */
-    display: flex;
-    flex-flow: column wrap;
     height: 100%;
-    width: 20%;
 }
 
-#startButton {
-    /* new game button */
+#container #topPart #leftPanel #buttonDiv #historyButton {
+    display: none;                                                                                                      /*Hidden in desktop mode*/
+}
+
+#container #topPart #leftPanel h2 {                                                                                     /*Score and counter*/
     width: 100%;
-    height: 10%;
-}
+    height: 20%;
 
-#score {
-    /* score /10 */
-    font-size: 5rem;
+    font-size: 3rem;
     text-align: center;
 }
 
-
-#centerPanel {
-    /* Center panel: question + flag div */
-    display: flex;
-    flex-flow: column;
-
-    height: 100%;
-    width: 80%;
-}
-
-#centerPanel h2 {
-    /* Asked question */
-    text-align: center;
-    font-size: 4rem;
-    height: 15%;
-    width: 100%;
-}
-
-#flag {
-    /* Div contenant l'image du drapeau et l'historique quand la partie se termine */
-    display: flex;
-    flex-flow: column;
-
-    justify-content: center;
-    align-items: center;
-
-    height: 80%;
-    width: 100%;
-}
-
-#flag img {
-    height: auto;
+#container #topPart #centralPanel {                                                                                     /*Central Panel*/
     width: 60%;
-    max-height: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-flow: column;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
 }
 
-#rightPanel {
-    /* right panel: counter + history */
-    display: flex;
-    flex-flow: column wrap;
+#container #topPart #centralPanel img {                                                                                 /*Flag*/
+    height: 70%;
+    width: auto;
+}
+
+#container #topPart #rightPanel {                                                                           /*Right Panel*/
 
     height: 100%;
     width: 20%;
 }
-
-#rightPanel p {
-    /* Counter Display */
-    display: flex;
-    flex-flow: column wrap;
-
-    font-size: 5rem;
+#container #topPart #rightPanel h2 {
+    font-size: 3rem;
     text-align: center;
 }
 
-#bottomPart {
-    /* Bottom part: 4 possibilities */
-    display: flex;
-    flex-flow: column wrap;
+#container #bottomPart {                                                                                            /*Bottom part*/
+    height: 40%;
 
-    height: 25%;
-    width: 75%;
+    position: relative;
+    bottom: 0;
+
+    display: flex;
+    flex-flow: column;
+
+    justify-content: space-between;
 }
 
-#answers {
-    display: flex;
-    flex-flow: column wrap;
-
-    height: 100%;
-}
-
-.answer {
-    /* Each possible answer */
-    margin: 0.15rem;
+#container #bottomPart .answer {
     height: 23%;
 
-    font-size: 2rem;
+    border: .5rem solid var(--text-and-border-color);
+    border-radius: 10rem;
+
+    background-color: var(--button-color);
+
+    font-size: 3rem;
 }
 
-#historyDiv {
-    /* History end of game */
-    flex-flow: column wrap;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-
-    display: none;
-
-}
-
-#historyDiv ul {
-    font-size: 1.7rem;
-    text-align: center;
-
-    display: flex;
-    flex-flow: column wrap;
-}
-
-/*Tablettes en mode portrait et grand mobiles*/
-@media screen and (max-width: 600px) {
-    /*Score a gauche, bouton au milieu, compteur a droite*/
-    #topPart {
+@media screen and (max-width: 768px) {                                                                                  /*Media query tablets*/
+    #container {
+        height: 100vh;
+        width: 100vw;
+    }
+    #container #topPart {
+        flex-flow: column;
         height: 60%;
         width: 100%;
-
-        flex-flow: row wrap;
+    }
+    #container #topPart #leftPanel {
+        flex-flow: row;
+        width: 100%;
+        height: 20%;
+    }
+    #container #topPart #leftPanel #buttonDiv {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        width: 10%;
+    }
+    #container #topPart #leftPanel #buttonDiv button {
+        display: block;
+        height: 50%;
+        font-size: 1.5rem;
+    }
+    #container #topPart #leftPanel #buttonDiv #historyButton {
+        display: block;
+    }
+    #container #topPart #leftPanel #score {
+        order: -1;
+        width: 45%;
+    }
+    #container #topPart #leftPanel #counter {
+        width: 45%;
     }
 
-
-    #leftPanel {
-        width: 25%;
+    #container #topPart #centralPanel {
+        width: 100%;
         height: 100%;
     }
 
-    #leftPanel #startButton {
-        font-size: 1rem;
+    #container #topPart #rightPanel {
+        display: none;
     }
 
-    #leftPanel #score {
-        font-size: 2rem;
-    }
-
-    /*Drapeau*/
-    #centerPanel {
-        width: 50%;
-        height: 100%;
-    }
-
-    #centerPanel h2 {
-        font-size: 2rem;
-    }
-
-    #centerPanel #flag img {
-        width: 120%;
-        height: auto;
-        max-height: 95%;
-    }
-
-    #rightPanel {
-        width: 25%;
-        height: 100%;
-    }
-
-    #rightPanel #counter {
-        font-size: 2rem;
-    }
-
-    /*Reponses*/
-    #bottomPart {
+    #container #bottomPart {
         height: 40%;
         width: 100%;
     }
-
-    #answers {
-        height: 100%;
-        width: 100%;
+    #container #bottomPart .answer {
+        font-size: 1rem;
     }
 
-    .answer {
-        width: 100%;
-    }
-
-    /*Historique*/
 }

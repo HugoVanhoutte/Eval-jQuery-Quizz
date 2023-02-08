@@ -2,50 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--Balise viewport pour les media queries et le responsive design-->
+    <!--Viewport tag for responsive design-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--Inclusion d'une police google font-->
+    <!--Google Font-->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
-    <!--Inclusion de font awesome-->
+    <!--Font Awesome (small pictures)-->
     <script src="https://kit.fontawesome.com/9010a17673.js" crossorigin="anonymous"></script>
-    <!--Inclusion de la feuille de style-->
+    <!--CSS stylesheet-->
     <link rel="stylesheet" href="style.css">
     <title>index</title>
 </head>
 <body>
-<!--Div container, contenant tout, sauf l'historique-->
-<div id="container">
-    <!--Div topPArt, contenant toute la partie du haut pour l'affichage sur PC-->
-    <div id="topPart">
-        <!--Div contenant le panneau de gauche, avec le score et le bouton "nouvelle partie"-->
-        <div id="leftPanel">
-            <button id="startButton"><i class="fa-solid fa-circle-play fa-4x"></i></button>
-            <p id="score">Score: 0/10</p>
-        </div>
-        <!--Div du panneau central, contenant la question et le drapeau à afficher-->
-        <div id="centerPanel">
-            <h2>A quel pays ce drapeau appartient-il ?</h2>
-            <div id="flag">
-                <img src="" alt="Flag to guess">
+
+
+<div id="container">                                                                                                    <!--Container: everything MUST go inside-->
+    <div id="topPart">                                                                                                  <!--Top part: left panel, central panel and right panel-->
+        <div id="leftPanel">                                                                                            <!--Left panel: play button, score and counter-->
+            <div id="buttonDiv">
+                <button id="startButton"><i class="fa-solid fa-play"></i></button>                                      <!--Start Button-->
+                <button id="historyButton"><i class="fa-solid fa-bars"></i></button>                                    <!--History Button-->
             </div>
+            <h2 id="score">Score:<br><span id="scoreNum">0</span>/10</h2>                                               <!--Score-->
+            <h2 id="counter">Question:<br><span id="counterNum">0</span>/10</h2>                                        <!--Counter-->
         </div>
-        <!--Panneau de droite, contenant le compteur-->
-        <div id="rightPanel">
-            <p id="counter">Question: 0/10</p>
+        <div id="centralPanel">                                                                                         <!--Central panel: Flag-->
+            <img src="" alt="Drapeau à deviner">                                                                        <!--Flag to guess-->
+        </div>
+        <div id="rightPanel">                                                                                           <!--Right panel: history-->
+            <h2>Historique: </h2>
+            <ul id="historyList">                                                                                       <!--History-->
 
-
+            </ul>
         </div>
     </div>
-    <!--Div contenant la partie basse, les réponses possibles-->
-    <div id="bottomPart">
-        <div id="answers">
-            <input type="button" id="answer1" class="answer">
-            <input type="button" id="answer2" class="answer">
-            <input type="button" id="answer3" class="answer">
-            <input type="button" id="answer4" class="answer">
-        </div>
+
+    <div id="bottomPart">                                                                                               <!-- Bottom part: answers-->
+        <button id="answer1" class="answer"></button>
+        <button id="answer2" class="answer"></button>
+        <button id="answer3" class="answer"></button>
+        <button id="answer4" class="answer"></button>
     </div>
 </div>
+
+
+
+
+
+
 <script src="jQuery.js"></script>
 <script src="app.js"></script>
 </body>

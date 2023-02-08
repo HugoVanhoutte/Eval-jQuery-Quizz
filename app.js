@@ -9,7 +9,7 @@ const answer4 = $('#answer4');
 const allAnswers = $('.answer');
 
 //Récupération de l'image
-const image = $('#flag img');
+const image = $('img');
 
 //Recuperation du score
 let scoreDisplay = $('#score');
@@ -19,7 +19,7 @@ let scoreDisplay = $('#score');
 let score = 0;
 
 //Création de la variable compteur
-let counter = 1;
+let counter = 0;
 //Récupération du compteur depuis le DOM
 let counterDisplay = $('#counter');
 
@@ -77,44 +77,39 @@ $.getJSON({
         function newGame() {
             game.setQuestions();
             //Mise des 4 questions dans les divs
-            answer1.val(game.q1);
-            answer2.val(game.q2);
-            answer3.val(game.q3);
-            answer4.val(game.q4);
+            answer1.text(game.q1);
+            answer2.text(game.q2);
+            answer3.text(game.q3);
+            answer4.text(game.q4);
 
             //Mise du drapeau dans l'image
             image.attr('src', `https://flagcdn.com/${game.a}.svg`);
             //Suppression de l'écouteur precedent
             allAnswers.off('click');
 
+
+            //TODO REMOVE
+            console.log(response[game.a]);
             //Récupération du clic et vérification du résultat
-            allAnswers.click(function () {
-                //Verification Compteur
-                if (counter < 10) {
-                    //Si le compteur est inférieur à 10
-                    //Incrementation du compteur et mise à jour
-                    counter++;
-                    counterDisplay.text(`Question: ${counter}/10`);
-                    newGame();
-                } else {
-                    //Sinon si le compteur est supérieur ou égal à 10
-                    //Fermer l'écouteur d'évènement
-                    allAnswers.off('click');
-                    $('#historyDiv').css('display', 'flex')
+            allAnswers.click(function () { //Good Answer
+                if ($(this).text() === response[game.a]){
+
+                    //TODO REMOVE
+                    console.log("correct")
+                } else { //Wrong Answer
+
+                    //TODO REMOVE
+                    console.log("not correct")
                 }
 
-                //Vérification de la réponse
-                if ($(this).val() === response[game.a]) {
-                    //Si bonne réponse
-                    score++;
-                    alert("Bonne réponse");
-                } else {
-                    //Mauvaise réponse
-                    alert("Mauvaise réponse" + response[game.a])
+                if (counter < 10){ //Counter not finished
+                    counter++;
+                    newGame();
+                } else { //Counter Finished
+                    allAnswers.off('click');
+                    //Display History
+
                 }
-                //Dans tous les cas
-                //Mise à jour de l'affichage du score
-                scoreDisplay.text(`Score: ${score}/10`);
             })
         }
 

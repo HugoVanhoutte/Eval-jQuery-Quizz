@@ -104,7 +104,7 @@ $.getJSON({
                     //Sets color for history
                     historyColor = "red";
                 }
-                historyList.append(`<li style="color: ${historyColor}">${response[game.a]}</li>`);
+                historyList.append(`<li style="color: ${historyColor}">${response[game.a]}</li><hr>`);
 
                 if (counter < 10){ //Counter not finished
                     counter++;
@@ -129,7 +129,7 @@ $.getJSON({
             counter = 1;
             counterDisplay.text(counter);
 
-            historyList.children().html('');
+            historyList.children().remove();
 
             //lancement d'une nouvelle question
             newGame();

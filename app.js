@@ -19,13 +19,17 @@ const counterDisplay = $('#counterNum');
 
 //History List
 const historyList = $('#historyList');
-
+//History Button (mobile only)
+const historyButton = $('#historyButton');
 
 //création de la variable score
 let score = 0;
 
 //Création de la variable compteur
 let counter = 0;
+
+//Creation History color variable
+let historyColor;
 
 
 //Fonction de génération de chiffre aléatoire entre o et "max"
@@ -44,7 +48,7 @@ let randomArray = (array, number) => {
 
 //Objet contenant les 4 questions
 function Questions() {
-     this.q1 = "";
+    this.q1 = "";
     this.q2 = "";
     this.q3 = "";
     this.q4 = "";
@@ -79,11 +83,6 @@ $.getJSON({
 
         //Function pour lancer une nouvelle partie (nouveau set de questions)
         function newGame() {
-                //Updates history
-            if (counter <= 10){
-                historyList.append(`<li>${response[game.a]}</li>`);
-            }
-            console.log(response[game.a]) //TODO REMOVE
             game.setQuestions();
             //Mise des 4 questions dans les divs
             answer1.text(game.q1);
@@ -99,12 +98,17 @@ $.getJSON({
             allAnswers.click(function () { //Good Answer
                 if ($(this).text() === response[game.a]){
                     score++;
+                    //Sets color for history
+                    historyColor = "green";
                 } else { //Wrong Answer
+                    //Sets color for history
+                    historyColor = "red";
                 }
+                historyList.append(`<li style="color: ${historyColor}">${response[game.a]}</li>`);
 
                 if (counter < 10){ //Counter not finished
                     counter++;
-                    counterDisplay.text(counter)
+                    counterDisplay.text(counter);
                     newGame();
                 }
                 else { //Counter Finished
@@ -117,6 +121,7 @@ $.getJSON({
 
         //Écouteur du bouton "Nouvelle Partie"
         startButton.click(function () {
+
             //Reinitialisation du score, de l'historique et du compteur
             score = 0;
             scoreDisplay.text(score);
@@ -129,6 +134,11 @@ $.getJSON({
             //lancement d'une nouvelle question
             newGame();
         });
+
+        //Ecouteur du bouton Historique
+        historyButton.click(function (){
+            $('#rightPanel').slideToggle();
+        })
     })
     //En cas d'échec de la requête Ajax
     .fail(function () {

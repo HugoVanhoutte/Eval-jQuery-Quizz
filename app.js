@@ -44,7 +44,7 @@ let randomArray = (array, number) => {
 
 //Objet contenant les 4 questions
 function Questions() {
-    this.q1 = "";
+     this.q1 = "";
     this.q2 = "";
     this.q3 = "";
     this.q4 = "";
@@ -67,7 +67,7 @@ $.getJSON({
             this.q4 = response[questions[3]];
 
             this.a = questions[randomNumber(questions.length)];
-
+                //Check for duplicates
             if (this.q1 === this.q2 || this.q1 === this.q3 || this.q1 === this.q4
                 || this.q2 === this.q3 || this.q2 === this.q4
                 || this.q3 === this.q4) {
@@ -79,6 +79,7 @@ $.getJSON({
 
         //Function pour lancer une nouvelle partie (nouveau set de questions)
         function newGame() {
+                //Updates history
             if (counter <= 10){
                 historyList.append(`<li>${response[game.a]}</li>`);
             }

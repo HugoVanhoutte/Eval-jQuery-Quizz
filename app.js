@@ -1,20 +1,21 @@
-//Recupération du bouton permettant de commencer la partie
+//////////////////////////////////////////////////DOM///////////////////////////////////////////////////////////////////
+//Play Button
 const startButton = $('#startButton');
 
-//Recuperation des divs contenant les 4 questions
+//4 possible answers
 const answer1 = $('#answer1');
 const answer2 = $('#answer2');
 const answer3 = $('#answer3');
 const answer4 = $('#answer4');
 const allAnswers = $('.answer');
 
-//Récupération de l'image
+//Picture
 const image = $('img');
 
-//Recuperation du score depuis le DOM
+//Score from DOM
 const scoreDisplay = $('#scoreNum');
 
-//Récupération du compteur depuis le DOM
+//Counter from DOM
 const counterDisplay = $('#counterNum');
 
 //History List
@@ -22,21 +23,32 @@ const historyList = $('#historyList');
 //History Button (mobile only)
 const historyButton = $('#historyButton');
 
-//création de la variable score
+//////////////////////////////////////////////////////Variables/////////////////////////////////////////////////////////
+//Score variable
 let score = 0;
 
-//Création de la variable compteur
+//Counter variable
 let counter = 0;
 
-//Creation History color variable
+//History color variable
 let historyColor;
 
 
-//Fonction de génération de chiffre aléatoire entre o et "max"
+/**
+ *
+ * @param max
+ * @returns {number} random number between 0 and max
+ */
 let randomNumber = (max) => {
     return Math.floor(Math.random() * max);
 }
-//Fonction de generation d'un tableau composé de "number" entrées
+
+/**
+ *
+ * @param array
+ * @param number
+ * @returns {*[]} array consisting of number entries from array in parameter
+ */
 let randomArray = (array, number) => {
     let generatedArray = [];
     for (let i = 0; i < number; i++) {
@@ -46,7 +58,7 @@ let randomArray = (array, number) => {
 }
 
 
-//Objet contenant les 4 questions
+//Object containing the right answer and the 4 possibilities
 function Questions() {
     this.q1 = "";
     this.q2 = "";
@@ -58,11 +70,13 @@ function Questions() {
 
 
 $.getJSON({
+//Ajax Request
     url: "https://flagcdn.com/fr/codes.json",
 })
     .done(function (response) {
+        //If request sucessful
         let keys = Object.keys(response);
-        //Fonction prototype Permettant de choisir les questions aléatoirement et de choisir la bonne réponse
+        //Prototype: choosing the answer and generating 3 wrong random answers
         Questions.prototype.setQuestions = function () {
             let questions = randomArray(keys, 4);
             this.q1 = response[questions[0]];
@@ -71,7 +85,7 @@ $.getJSON({
             this.q4 = response[questions[3]];
 
             this.a = questions[randomNumber(questions.length)];
-                //Check for duplicates
+            //Checks for duplicates
             if (this.q1 === this.q2 || this.q1 === this.q3 || this.q1 === this.q4
                 || this.q2 === this.q3 || this.q2 === this.q4
                 || this.q3 === this.q4) {
@@ -79,22 +93,24 @@ $.getJSON({
             }
         }
 
+        //invokes object, will be modified with new questions on every answer
         const game = new Questions();
 
-        //Function pour lancer une nouvelle partie (nouveau set de questions)
+
         function newGame() {
+            //invoked when new game starts or possibility clicked
             game.setQuestions();
-            //Mise des 4 questions dans les divs
+            //puts 4 possibilities in buttons
             answer1.text(game.q1);
             answer2.text(game.q2);
             answer3.text(game.q3);
             answer4.text(game.q4);
 
-            //Mise du drapeau dans l'image
+            //sets the image src
             image.attr('src', `https://flagcdn.com/${game.a}.svg`);
-            //Suppression de l'écouteur precedent
+            //removes previous event listeners
             allAnswers.off('click');
-            //Récupération du clic et vérification du résultat
+            //listens for a click on a possibility
             allAnswers.click(function () { //Good Answer
                 if ($(this).text() === response[game.a]){
                     score++;
@@ -104,6 +120,7 @@ $.getJSON({
                     //Sets color for history
                     historyColor = "red";
                 }
+                //All cases, before checking for counter end
                 historyList.append(`<li style="color: ${historyColor}">${response[game.a]}</li><hr>`);
 
                 if (counter < 10){ //Counter not finished
@@ -119,10 +136,10 @@ $.getJSON({
             })
         }
 
-        //Écouteur du bouton "Nouvelle Partie"
+        //listens for play button
         startButton.click(function () {
 
-            //Reinitialisation du score, de l'historique et du compteur
+            //Resets score, history and counter
             score = 0;
             scoreDisplay.text(score);
 
@@ -131,16 +148,20 @@ $.getJSON({
 
             historyList.children().remove();
 
-            //lancement d'une nouvelle question
+            //Shows hidden elements on game start
+            $('#container #topPart #centralPanel img').css('visibility', 'visible');
+            $('#container #bottomPart').css('visibility', 'visible');
+
+            //sets a new question
             newGame();
         });
 
-        //Ecouteur du bouton Historique
+        //listens for history button (mobile only)
         historyButton.click(function (){
             $('#rightPanel').slideToggle();
         })
     })
-    //En cas d'échec de la requête Ajax
+    //In case of request fail
     .fail(function () {
         console.log(Error);
     })

@@ -69,8 +69,11 @@ body {
     font-family: 'Raleway', sans-serif;
 
     position: fixed;                                                                                                    /*Disable scroll*/
+    color: var(--text-and-border-color);
 }
-
+button {
+    color: var(--text-and-border-color);
+}
 
 #container {                                                                                                            /*Container: 100% of screen on widtn and height*/
     height: 100vh;
@@ -148,9 +151,11 @@ body {
     width: 50%;
 
     max-height: 100%;
+
+    visibility: hidden;                                                                                                 /*Appears at game start*/
 }
 
-#container #topPart #rightPanel {                                                                           /*Right Panel*/
+#container #topPart #rightPanel {                                                                                       /*Right Panel*/
     height: 100%;
     width: 20%;
 
@@ -171,6 +176,7 @@ body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
 #container #topPart #rightPanel h2 {
     font-size: 3rem;
     text-align: center;
@@ -186,6 +192,8 @@ body {
     flex-flow: column;
 
     justify-content: space-between;
+
+    visibility: hidden;                                                                                                 /*Hidden before game start*/
 }
 
 #container #bottomPart .answer {
@@ -251,8 +259,10 @@ body {
 
         position: fixed;
         top: 10%;
-        height: 45%;
+        height: 85%;
         width: 90%;
+
+        z-index: 1000;
 
         background-color: var(--button-color);
 

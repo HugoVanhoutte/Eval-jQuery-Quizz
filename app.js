@@ -129,7 +129,12 @@ $.getJSON({
                     newGame();
                 }
                 else { //Counter Finished
+                    //Removes event listener on possibilities click
                     allAnswers.off('click');
+
+                    //Removes the flag and displays "game finished"
+                    $('h1').css('display', 'inline').text(`Score final: ${score}/10`);
+                    image.css('display', 'none');
                 }
                 //All cases
                 scoreDisplay.text(score);
@@ -149,8 +154,9 @@ $.getJSON({
             historyList.children().remove();
 
             //Shows hidden elements on game start
-            $('#container #topPart #centralPanel img').css('visibility', 'visible');
+            image.css('display', 'flex');
             $('#container #bottomPart').css('visibility', 'visible');
+            $('h1').css('display', 'none');
 
             //sets a new question
             newGame();

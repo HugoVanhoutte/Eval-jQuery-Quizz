@@ -70,12 +70,10 @@ body {
     position: fixed;                                                                                                    /*Disable scroll*/
     color: var(--text-and-border-color);
 }
+
 #container {                                                                                                            /*Container: 100% of screen on width and height*/
     height: 100vh;
     width: 100vw;
-
-    max-height: 100vh;
-
     display: flex;
     flex-flow: column;
 }
@@ -218,10 +216,6 @@ h1 {
 
 @media screen and (max-width: 768px) {
     /*Media query tablets*/
-    #container {
-        height: 100vh;
-        width: 100vw;
-    }
     #topPart {
         flex-flow: column;
         height: 60%;

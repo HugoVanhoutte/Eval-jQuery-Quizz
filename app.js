@@ -33,7 +33,7 @@ let counter = 0;
 //History color variable
 let historyColor;
 
-
+//////////////////////////////////////////////////Functions/////////////////////////////////////////////////////////////
 /**
  *
  * @param max
@@ -76,7 +76,7 @@ $.getJSON({
     .done(function (response) {
         //If request sucessful
         let keys = Object.keys(response);
-        //Prototype: choosing the answer and generating 3 wrong random answers
+        //Prototype: generates 4 random answers and choosing one to be the good one
         Questions.prototype.setQuestions = function () {
             let questions = randomArray(keys, 4);
             this.q1 = response[questions[0]];

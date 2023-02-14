@@ -67,10 +67,10 @@ body {
     background-color: var(--background-color);
     font-family: 'Raleway', sans-serif;
 
-    position: fixed;                                                                                                    /*Disable scroll*/
+    position: fixed; /*Disable scroll*/
     color: var(--text-and-border-color);
 }
-#container {                                                                                                            /*Container: 100% of screen on width and height*/
+#container { /*Container: 100% of screen on width and height*/
     height: 100vh;
     width: 100vw;
 

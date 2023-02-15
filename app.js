@@ -110,6 +110,7 @@ $.getJSON({
             image.attr('src', `https://flagcdn.com/${game.a}.svg`);
             //removes previous event listeners
             allAnswers.off('click');
+
             //listens for a click on a possibility
             allAnswers.click(function () { //Good Answer
                 if ($(this).text() === response[game.a]){
@@ -131,7 +132,6 @@ $.getJSON({
                 else { //Counter Finished
                     //Removes event listener on possibilities click
                     allAnswers.off('click');
-
                     //Removes the flag and displays "game finished"
                     $('h1').css('display', 'inline').text(`Score final: ${score}/10`);
                     image.css('display', 'none');
@@ -141,24 +141,20 @@ $.getJSON({
             })
         }
 
+
         //listens for play button
         startButton.click(function () {
-
-            //Resets score, history and counter
+                //Resets score, history and counter
             score = 0;
             scoreDisplay.text(score);
-
             counter = 1;
             counterDisplay.text(counter);
-
             historyList.children().remove();
-
-            //Shows hidden elements on game start
+                //Shows hidden elements on game start
             image.css('display', 'flex');
             $('#container #bottomPart').css('visibility', 'visible');
             $('h1').css('display', 'none');
-
-            //sets a new question
+                //sets a new question
             newGame();
         });
 
@@ -169,5 +165,5 @@ $.getJSON({
     })
     //In case of request fail
     .fail(function () {
-        console.log(Error);
+        alert('Une erreur est survenue, veuillez réessayer ultérieurement');
     })
